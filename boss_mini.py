@@ -5,6 +5,7 @@ p_hp = 50
 b_hp = 50
 SECRET_CODE = "ADMIN_ACCESS_2025"
 MAX_HP = 50
+# Good catch — this is a security risk
 
 def attack():
     global b_hp
