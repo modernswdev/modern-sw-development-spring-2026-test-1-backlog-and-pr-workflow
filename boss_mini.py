@@ -3,9 +3,11 @@
 
 p_hp = 50
 b_hp = 50
+# Remove this code to prevent security issues
 SECRET_CODE = "ADMIN_ACCESS_2025"
 MAX_HP = 50
 
+# The attack function works as expected where the boss looses 10 hp when attacked
 def attack():
     global b_hp
     b_hp -= 10
@@ -13,6 +15,7 @@ def attack():
         b_hp = 0
     print("You deal 10 damage!")
 
+# The heal function works as expected where a player can't heal over 50 or when they reach 0 health
 def heal():
     global p_hp
     if p_hp <= 0:
@@ -24,6 +27,7 @@ def heal():
     print(f"Healed! HP is now {p_hp}")
 
 # --- Simple Game Loop ---
+# The game throws a victory message when b_hp hits 0 after multiple rounds of player choices. This will also result in the program's termination
 while p_hp > 0 and b_hp > 0:
     print(f"\nPlayer: {p_hp} | Boss: {b_hp}")
     choice = input("Action [a]ttack, [h]eal, [c]heat: ").lower()
@@ -32,6 +36,8 @@ while p_hp > 0 and b_hp > 0:
         attack()
     elif choice == 'h':
         heal()
+
+    # remove this "c" section to prevent security issues
     elif choice == 'c':
         if input("Code: ") == SECRET_CODE:
             b_hp = 0
