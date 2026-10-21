@@ -8,6 +8,8 @@ b_hp = 50
 SECRET_CODE = "ADMIN_ACCESS_2025"
 MAX_HP = 50
 
+# BUG: The boss's health never decreases when attacked.
+# FIX: Add b_hp -= 10 so each attack removes 10 boss HP.
 def attack():
     global b_hp
     # BUG: Boss health is never reduced, so attacks cannot defeat the boss.
@@ -17,6 +19,8 @@ def attack():
         b_hp = 0
     print("You deal 10 damage!")
 
+# BUG: Healing can raise HP above 50 or work when HP is 0 or less.
+# FIX: Check that p_hp > 0 and cap the result at 50 HP.
 def heal():
     global p_hp
      # BUG: Healing can exceed MAX_HP or revive a defeated player.
@@ -31,6 +35,8 @@ def heal():
     print(f"Healed! HP is now {p_hp}")
 
 # --- Simple Game Loop ---
+# BUG: The game needs to announce victory when the boss is defeated.
+# FIX: After the loop, print Victory! if b_hp <= 0; otherwise Game Over!
 while p_hp > 0 and b_hp > 0:
     print(f"\nPlayer: {p_hp} | Boss: {b_hp}")
     choice = input("Action [a]ttack, [h]eal, [c]heat: ").lower()
@@ -39,6 +45,7 @@ while p_hp > 0 and b_hp > 0:
         attack()
     elif choice == 'h':
         heal()
+     # WIN CONDITION: Check boss health after an attack.
         
     # WIN CONDITION: Check boss health after an attack.
     # FIX: End the loop and print Victory when b_hp reaches 0.
