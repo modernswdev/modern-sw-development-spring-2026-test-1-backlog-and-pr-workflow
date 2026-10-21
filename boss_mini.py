@@ -2,6 +2,7 @@
 
 # SECURITY BUG: Hardcoding a secret exposes the cheat credential.
 # FIX: Remove this variable and all associated cheat logic.
+
 p_hp = 50
 b_hp = 50
 SECRET_CODE = "ADMIN_ACCESS_2025"
@@ -24,6 +25,7 @@ def heal():
     global p_hp
      # BUG: Healing can exceed MAX_HP or revive a defeated player.
     # FIX: Only heal if p_hp > 0 and cap health at MAX_HP.
+
     if p_hp <= 0:
         print("You cannot heal when defeated.")
         return
@@ -44,6 +46,8 @@ while p_hp > 0 and b_hp > 0:
     elif choice == 'h':
         heal()
      # WIN CONDITION: Check boss health after an attack.
+        
+    # WIN CONDITION: Check boss health after an attack.
     # FIX: End the loop and print Victory when b_hp reaches 0.
     elif choice == 'c':
         if input("Code: ") == SECRET_CODE:
