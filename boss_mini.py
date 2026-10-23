@@ -3,9 +3,13 @@
 
 p_hp = 50
 b_hp = 50
+# SECURITY BUG: The hardcoded secret exposes the cheat code to anyone
+# who can read the source. Remove this variable and the cheat logic.
 SECRET_CODE = "ADMIN_ACCESS_2025"
 MAX_HP = 50
 
+# BUG: The boss's health never decreases when attacked.
+# FIX: Add b_hp -= 10 so each attack removes 10 boss HP.
 def attack():
     global b_hp
     b_hp -= 10
@@ -13,6 +17,8 @@ def attack():
         b_hp = 0
     print("You deal 10 damage!")
 
+# BUG: Healing can raise HP above 50 or work when HP is 0 or less.
+# FIX: Check that p_hp > 0 and cap the result at 50 HP.
 def heal():
     global p_hp
     if p_hp <= 0:
@@ -23,6 +29,8 @@ def heal():
         p_hp = MAX_HP
     print(f"Healed! HP is now {p_hp}")
 
+# BUG: The game needs to announce victory when the boss is defeated.
+# FIX: After the loop, print Victory! if b_hp <= 0; otherwise Game Over!
 # --- Simple Game Loop ---
 while p_hp > 0 and b_hp > 0:
     print(f"\nPlayer: {p_hp} | Boss: {b_hp}")
